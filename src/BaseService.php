@@ -64,7 +64,7 @@ abstract class BaseService
      * @param array $headers
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function route(string $route, array $parameters = [], int $status = 302, array $headers = []): RedirectResponse
+    protected function redirectRoute(string $route, array $parameters = [], int $status = 302, array $headers = []): RedirectResponse
     {
         return redirect()->route($route, $parameters, $status, $headers);
     }
@@ -78,7 +78,7 @@ abstract class BaseService
      * @param array $headers
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function action(string|array $action, array $parameters = [], int $status = 302, array $headers = []): RedirectResponse
+    protected function redirectAction(string|array $action, array $parameters = [], int $status = 302, array $headers = []): RedirectResponse
     {
         return redirect()->action($action, $parameters, $status, $headers);
     }
@@ -91,7 +91,7 @@ abstract class BaseService
      * @param array $headers
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function away(string $url, int $status = 302, array $headers = []): RedirectResponse
+    protected function redirectAway(string $url, int $status = 302, array $headers = []): RedirectResponse
     {
         return redirect()->away($url, $status, $headers);
     }
@@ -104,7 +104,7 @@ abstract class BaseService
      * @param mixed $fallback
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function back(int $status = 302, array $headers = [], mixed $fallback = false): RedirectResponse
+    protected function redirectBack(int $status = 302, array $headers = [], mixed $fallback = false): RedirectResponse
     {
         return redirect()->back($status, $headers, $fallback);
     }
