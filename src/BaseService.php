@@ -7,6 +7,10 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 use Illuminate\Http\RedirectResponse;
 
+use Illuminate\Support\Collection as IlluminateCollection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 use YukataRm\Laravel\Mail\Client;
 
 use YukataRm\Laravel\Transaction\Facade\Transaction;
@@ -107,6 +111,35 @@ abstract class BaseService
     protected function redirectBack(int $status = 302, array $headers = [], mixed $fallback = false): RedirectResponse
     {
         return redirect()->back($status, $headers, $fallback);
+    }
+
+    /*----------------------------------------*
+     * Pagination
+     *----------------------------------------*/
+
+    /**
+     * convert to paginator
+     * 
+     * @param array|\Illuminate\Support\Collection|\Illuminate\Database\Eloquent\Collection $items
+     * @param int $total
+     * @param int $perPage
+     * @param int|null $currentPage
+     * @param array $options
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    protected function paginator(array|IlluminateCollection|EloquentCollection $items, int $total, int $perPage, int|null $currentPage = null, array $options = []): LengthAwarePaginator
+    {
+        if (is_array($items)) $items = collect($items);
+
+        if ($items instanceof EloquentCollection) $items = $items->toBase();
+
+        $paginator = new LengthAwarePaginator($items, $total, $perPage, $currentPage, $options);
+
+        $paginator = $paginator->withPath(request()->url());
+
+        $paginator = $paginator->withQueryString();
+
+        return $paginator;
     }
 
     /*----------------------------------------*
