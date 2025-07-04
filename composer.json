@@ -1,0 +1,38 @@
+{
+    "name": "yukata-roommate/laravel-service",
+    "description": "Easy to define service layer for Laravel",
+    "version": "1.0.0",
+    "keywords": [
+        "yukata-roommate",
+        "php",
+        "laravel",
+        "package",
+        "service",
+        "laravel-service"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yukata Roommate"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "YukataRm\\Laravel\\Service\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YukataRm\\Laravel\\Service\\ServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": ">=8.3.0",
+        "laravel/framework": "^11.0 || ^12.0",
+        "yukata-roommate/laravel-db": "^1.0.0",
+        "yukata-roommate/laravel-exception": "^1.0.0",
+        "yukata-roommate/laravel-mail": "^1.0.0"
+    }
+}
